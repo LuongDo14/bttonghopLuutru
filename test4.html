@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quản lý Sản phẩm</title>
+    <link rel="stylesheet" type="text/css" href="test4.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quản lý Sản phẩm</h1>
+        <form id="product-form">
+            <input type="text" id="product-name" placeholder="Tên sản phẩm" required>
+            <input type="number" id="product-price" placeholder="Giá sản phẩm" required>
+            <button type="submit">Thêm Sản phẩm</button>
+        </form>
+        <div id="product-list">
+            <table  class ="tab" border="1">
+                <caption border="0.5">DANH SÁCH HỌC VIÊN</caption>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Tác vụ</th>
+                    </tr>
+                </thead>
+                <tbody id="listStudents">
+        
+                </tbody>
+            </table>
+            <!-- Danh sách sản phẩm sẽ được hiển thị ở đây -->
+        </div>
+        
+    </div>
+    <script src="test4.js"></script>
+</body>
+</html>

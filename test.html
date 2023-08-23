@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý học viên</title>
+</head>
+<body>
+    <h1>Thông tin học viên</h1>
+    <form id="studentForm">
+        <div>
+            <label for="name">Họ và tên:</label>
+            <input type="text" id="name" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+        </div>
+        <div>
+            <label for="phone">Số điện thoại:</label>
+            <input type="tel" id="phone" pattern="[0-9]{10}" required>
+        </div>
+        <div>
+            <label for="hometown">Quê quán:</label>
+            <input type="text" id="hometown" required>
+        </div>
+        <div>
+            <label for="gender">Giới tính:</label>
+            <select id="gender">
+                <option value="Nam" selected>Nam</option>
+                <option value="Nữ">Nữ</option>
+            </select>
+        </div>
+        <button type="button" id="save">Lưu lại</button>
+        <button type="button" id="edit">Chỉnh sửa</button>
+        <button type="button" id="delete">Xoá</button>
+    </form>
+
+    <h1>Danh sách học viên</h1>
+    <ul id="studentList">
+    </ul>
+
+    <script>
+        const studentForm = document.getElementById("studentForm");
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const phoneInput = document.getElementById("phone");
+        const hometownInput = document.getElementById("hometown");
+        const genderSelect = document.getElementById("gender");
+        const saveButton = document.getElementById("save");
+        const editButton = document.getElementById("edit");
+        const deleteButton = document.getElementById("delete");
+        const studentList = document.getElementById("studentList");
+
+        let students = [];
+
+        saveButton.addEventListener("click", function () {
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const phone = phoneInput.value.trim();
+            const hometown = hometownInput.value.trim();
+            const gender = genderSelect.value;
+
+            if (!name || !email || !phone || !hometown) {
+                alert("Vui lòng điền đầy đủ thông tin học viên.");
+                return;
+            }
+
+            const student = { name, email, phone, hometown, gender };
+            students.push(student);
+            displayStudentList();
+            clearForm();
+        });
+
+        editButton.addEventListener("click", function () {
+            const selectedIndex = studentList.selectedIndex;
+            if (selectedIndex !== -1) {
+                const selectedStudent = students[selectedIndex];
+                nameInput.value = selectedStudent.name;
+                emailInput.value = selectedStudent.email;
+                phoneInput.value = selectedStudent.phone;
+                hometownInput.value = selectedStudent.hometown;
+                genderSelect.value = selectedStudent.gender;
+            }
+        });
+
+        deleteButton.addEventListener("click", function () {
+            const selectedIndex = studentList.selectedIndex;
+            if (selectedIndex !== -1) {
+                students.splice(selectedIndex, 1);
+                displayStudentList();
+                clearForm();
+            }
+        });
+
+        function displayStudentList() {
+            studentList.innerHTML = "";
+            students.forEach((student) => {
+                const li = document.createElement("li");
+                li.textContent = `${student.name}, ${student.email}, ${student.phone}, ${student.hometown}, ${student.gender}`;
+                studentList.appendChild(li);
+            });
+        }
+
+        function clearForm() {
+            nameInput.value = "";
+            emailInput.value = "";
+            phoneInput.value = "";
+            hometownInput.value = "";
+            genderSelect.value = "Nam";
+        }
+    </script>
+</body>
+</html>
